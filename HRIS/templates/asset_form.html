@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+<div class="container">
+
+    <center>
+        <br>
+        <h2>Asset Form</h2>
+    </center>
+    <form action="" method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                {{form.name|as_crispy_field}}
+                <div class="col-md-3">
+                    {{form.date|as_crispy_field}}
+                </div>
+
+                <div class="col-md-3">
+                    {{form.category|as_crispy_field}}
+                </div>
+                <button type="submit" class="btn btn btn-success">Submit</button>
+                <a href="/asset" class='btn btn-secondary'> Back to the list</a>
+    
+            </div>
+           
+
+        </div>
+    </form>
+
+</div>
+
+
+{% endblock body %}
