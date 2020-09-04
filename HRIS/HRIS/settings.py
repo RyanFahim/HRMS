@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'asset.apps.AssetConfig'
+    'asset.apps.AssetConfig',
+    'companies.apps.CompaniesConfig',
+    'notice.apps.NoticeConfig'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -80,8 +82,12 @@ WSGI_APPLICATION = 'HRIS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'rryan143',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

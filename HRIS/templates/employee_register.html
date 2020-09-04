@@ -1,7 +1,26 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block body %}
+
+<style>
+    .container-fluid{
+        display: inline-flex;
+    }
+    .card{
+        position: relative;
+        width: 200px;
+        
+    }
+    .content{
+        position: fixed;
+        margin-left: 300px;
+        padding-left: 20px;
+    }
+
+</style>
+
 <div class="container">
     <center>
         <br>
@@ -9,6 +28,22 @@
 
         <br>
     </center>
+
+
+
+<div class="container-fluid">
+
+
+ 
+      <div class="card" style="width: 18rem;">
+        <img src='{% static "/images/1.jpg" %}' width="900" height="600" class="d-block w-100" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Employee Register</h5>
+         
+        </div>
+      </div>
+
+    <div class="content">
     <form action="" method="post" autocomplete="off">
         {% csrf_token %}
         {{form.name|as_crispy_field}}
@@ -29,7 +64,7 @@
 
                     <button type="submit" class="btn btn btn-success">Submit</button>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-8">
                     <a href="/employee" class='btn btn-secondary'> Back to the list</a>
                 </div>
             </div>
@@ -37,7 +72,8 @@
 
 
     </form>
-
+</div>
+</div>
 </div>
 
 {% endblock body %}

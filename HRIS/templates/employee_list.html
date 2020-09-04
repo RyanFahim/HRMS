@@ -32,16 +32,19 @@
                 <td>{{employee.emp_code}}</td>
                 <td>{{employee.position}}</td>
                 <td>
-                <form action="{% url 'employee_delete' employee.id %}" method="post">
-                    {% csrf_token %}
-                <button type="submit" class="btn">
-                    <i class="fa fa-trash-o"></i>
-                </button>
-                </form>
+                    <a href="{% url 'employee_update' employee.id %}" class="btn text-secondary px-0">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                    <form action="{% url 'employee_delete' employee.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </form>
                 </td>
-                </tr>
+            </tr>
 
-                
+
             {% endfor %}
         </tbody>
 

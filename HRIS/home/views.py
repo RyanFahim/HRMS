@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .forms import Employeeform
 from .models import Employee
+from companies.models import Company
 
 # Create your views here.
 #admin1234, halumhalum
@@ -16,18 +17,14 @@ def index(request):
     #Customer Table
     
     employee = Employee.objects.all()
-
+    company = Company.objects.all()
     
-
-    #place order table
-    
-
     total_employee = employee.count()
+    total_company = company.count()
 
     context ={
-        'total_employee': total_employee
-
-    }
+        'total_employee': total_employee, 'total_company':total_company
+        }
 
     
     return render(request, 'index.html', context)
@@ -62,12 +59,20 @@ def employee_list(request):
     context = {'employee_list': Employee.objects.all()}
     return render (request,'employee_list.html',context)
 
-def employee_form(request):
-    if request.method == 'GET':   
-        form = Employeeform()
+def employee_form(request, id=0):
+    if request.method == 'GET':
+        if id == 0:
+            form = Employeeform()
+        else:
+            employee = Employee.objects.get(pk=id)
+            form = Employeeform(instance=employee)
         return render(request, 'employee_register.html',{'form':form})
     else:
-        form = Employeeform(request.POST)
+        if id == 0:
+            form = Employeeform(request.POST)
+        else:
+            employee = Employee.objects.get(pk=id) 
+            form = Employeeform(request.POST, instance=employee)
         if form.is_valid():
             form.save()
         return redirect('/employee')
