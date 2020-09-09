@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+
+<style>
+    .container-fluid {
+        display: inline-flex;
+    }
+
+    .card {
+        position: relative;
+        width: 200px;
+
+    }
+
+    .content {
+        position: fixed;
+        margin-left: 300px;
+        padding-left: 20px;
+    }
+</style>
+
+<div class="container">
+    <center>
+        <br>
+        <h1>Employee Register</h1>
+
+        <br>
+    </center>
+
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-4">
+                
+                
+                    <img src='{% static "/images/employee_form.svg" %}' width="900" height="600" class="d-block w-100"
+                        alt="..."> <hr>
+                    
+                        <h5>Employee Register</h5>
+
+                   
+                        
+                
+            </div>
+            
+                <div class="content">
+                    <form action="" method="post" autocomplete="off">
+                        {% csrf_token %}
+                        {{form.name|as_crispy_field}}
+                        {{form.email|as_crispy_field}}
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{form.emp_code|as_crispy_field}}
+                            </div>
+
+                            <div class="col-md-4">
+                                {{form.position|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <button type="submit" class="btn btn btn-success">Submit</button>
+                                </div>
+                                <div class="col-md-8">
+                                    <a href="/employee" class='btn btn-secondary'> Back to the list</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

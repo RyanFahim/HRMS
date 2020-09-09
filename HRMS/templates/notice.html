@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Notice{% endblock %}
+
+{% block body %}
+<div class="container">
+  <center>
+    <h3>Notice</h3>
+  </center>
+  <br>
+
+  <div class="row">
+    <div class="col-md-4 ">
+
+
+
+      <form id="addNotice" action="">
+        <div class="form-group">
+          <img src='{% static "/images/notice.png" %}' alt=""> <br>
+          <input class="form-control" type="text" name="title" placeholder="Title" required>
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" name="date" placeholder="YYYY-MM-DD">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" rows="3" name="des" placeholder="Description" required>
+        </div>
+        <button class="btn btn-outline-success" type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="col-md-8">
+
+      <table id="noticeTable" class="table table-striped">
+
+        {% if notice %}
+        {% for notice in notice %}
+        <tr id="notice-{{notice.id}}">
+          <td class="noticeTitle noticeData" name="title">
+            <h3>{{notice.title}}</h3>
+          </td>
+          <td align="center">
+            <button class="btn text-secondary px-0" onClick="editNotice({{notice.id}})" data-toggle="modal"
+              data-target="#myModal" )"><i class="fa fa-pencil-square-o"></i></button>
+            <button class="btn text-secondary px-0" onClick="deleteNotice({{notice.id}})"><i
+                class="fa fa-trash-o"></i></button>
+          </td>
+
+        <tr>
+          <td class="noticeDes noticeData" name="des">{{notice.des}}</td>
+          <td class="noticeDate noticeData" name="date"><small>{{notice.date}}</small></td>
+
+        </tr>
+        </tr>
+        {% endfor %}
+        {% else %}
+        No Notice
+        {% endif %}
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">Update Notice</h4>
+      </div>
+      <form id="updateNotice" action="">
+        <div class="modal-body">
+          <input class="form-control" id="form-id" type="hidden" name="formId" />
+          <label for="title">Title</label>
+          <input class="form-control" id="form-title" type="text" name="formTitle" />
+          <label for="date">Date</label>
+          <input class="form-control" id="form-date" type="text" name="formDate" />
+          <label for="des">Description</label>
+          <input class="form-control" id="form-des" type="number" name="formDes" min=10 max=100 />
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+
+
+  // Create Django Ajax Call
+  $("form#addNotice").submit(function () {
+    var titleInput = $('input[name="title"]').val().trim();
+    var dateInput = $('input[name="date"]').val().trim();
+    var desInput = $('input[name="des"]').val().trim();
+    if (titleInput && dateInput && desInput) {
+      // Create Ajax Call
+      $.ajax({
+        url: '{% url "create_notice" %}',
+        data: {
+          'title': titleInput,
+          'date': dateInput,
+          'des': desInput
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.notice) {
+            appendToNoticeTable(data.notice);
+          }
+        }
+      });
+    } else {
+      alert("All fields must have a valid value.");
+    }
+    $('form#addNotice').trigger("reset");
+    return false;
+  });
+  function appendToNoticeTable(notice) {
+    $("#noticeTable > tbody:last-child").append(`
+  
+        <tr id="notice-{{notice.id}}">
+              <td class="noticeTitle noticeData" name="title"><h3>${notice.title}</h3></td>
+              <td align="center">
+                <button class="btn text-secondary px-0" onClick="editNotice(${notice.id})" data-toggle="modal" data-target="#myModal")"><i class="fa fa-pencil-square-o"></i></button>
+                <button class="btn text-secondary px-0" onClick="deleteNotice(${notice.id})"><i class="fa fa-trash-o"></i></button>
+            </td>
+           
+          <tr>
+              <td class="noticeDes noticeData" name="des">${notice.des}</td>
+              <td class="noticeDate noticeData" name="date"><small>${notice.date}</small></td>
+             
+            </tr>
+          </tr>
+    `);
+  }
+
+
+
+  // // Create Django Ajax Call
+
+  // Create Django Ajax Call
+  $("form#updateNotice").submit(function () {
+    var idInput = $('input[name="formId"]').val().trim();
+    var titleInput = $('input[name="formTitle"]').val().trim();
+    var dateInput = $('input[name="formDate"]').val().trim();
+    var desInput = $('input[name="formDes"]').val().trim();
+    if (titleInput && dateInput && desInput) {
+      // Create Ajax Call
+      $.ajax({
+        url: '{% url "update_notice" %}',
+        data: {
+          'id': idInput,
+          'title': titleInput,
+          'date': dateInput,
+          'des': desInput
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.notice) {
+            updateToNoticeTabel(data.notice);
+          }
+        }
+      });
+    } else {
+      alert("All fields must have a valid value.");
+    }
+    $('form#updateNotice').trigger("reset");
+    $('#myModal').modal('hide');
+    return false;
+  });
+
+  // Update Django Ajax Call
+  function editNotice(id) {
+    if (id) {
+      tr_id = "#notice-" + id;
+      title = $(tr_id).find(".noticeTitle").text();
+      date = $(tr_id).find(".noticeDate").text();
+      des = $(tr_id).find(".noticeDes").text();
+      $('#form-id').val(id);
+      $('#form-title').val(title);
+      $('#form-date').val(date);
+      $('#form-des').val(des);
+    }
+  }
+  function updateToNoticeTabel(user) {
+    $("#noticeTable #notice-" + notice.id).children(".noticeData").each(function () {
+      var attr = $(this).attr("title");
+      if (attr == "title") {
+        $(this).text(notice.title);
+      } else if (attr == "date") {
+        $(this).text(notice.date);
+      } else {
+        $(this).text(notice.des);
+      }
+    });
+  }
+
+
+  function deleteNotice(id) {
+    var action = confirm("Are you sure you want to delete this user?");
+    if (action != false) {
+      $.ajax({
+        url: '{% url "delete_notice" %}',
+        data: {
+          'id': id,
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.deleted) {
+            $("#noticeTable #notice-" + id).remove();
+          }
+        }
+      });
+    }
+  }
+
+
+</script>
+
+{% endblock script %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock css %}
+
+
+{% block body %}
+
+<div class="row">
+
+    <div class="container">
+        <h3>All you need to know about us</h3>
+        <hr>
+        <div class="container-fluid text-center">
+            <div class="row">
+                <div class="col-8">
+            <div id="profile"></div>
+        </div>
+            <hr>
+            <div class="col-4">
+            <div align="item-center" class="picture" id="image"></div>
+        </div>
+        </div>
+
+
+        </div>
+        <hr><br>
+        <button class="btn btn-outline-success btn-lg float-right" id="next"><i class="fa fa-hand-o-right"></i> Next</button>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block script %}
+<!-- <script src="{%static 'css/about.js'%}"></script> -->
+<script src="{% static "js/about.js" %}"></script>
+{% endblock script %}
