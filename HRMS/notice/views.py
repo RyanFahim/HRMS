@@ -3,13 +3,19 @@ from django.http import JsonResponse
 from django.views.generic import ListView, View, DetailView
 from .models import Notice
 
+
 class NoticeView(ListView):
+    
+    
     model = Notice
     template_name = 'notice.html'
     context_object_name = 'notice'
 
 class CreateNotice(View):
     def  get(self, request):
+        
+        if request.user.is_anonymous:
+            return redirect("/login")
         title1 = request.GET.get('title', None)
         date1 = request.GET.get('date',None)
         des1 = request.GET.get('des', None)
@@ -29,6 +35,9 @@ class CreateNotice(View):
 
 class DeleteNotice(View):
     def  get(self, request):
+        if request.user.is_anonymous:
+            return redirect("/login")
+
         id1 = request.GET.get('id', None)
         Notice.objects.get(id=id1).delete()
         data = {
@@ -38,6 +47,9 @@ class DeleteNotice(View):
 
 class UpdateNotice(View):
     def  get(self, request):
+        if request.user.is_anonymous:
+            return redirect("/login")
+            
         id1 = request.GET.get('id',None)
         title1 = request.GET.get('title',None)
         date1 = request.GET.get('date', None)

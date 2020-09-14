@@ -1,4 +1,4 @@
-console.log("Neve")
+console.log("Never");
 
 // Data about us
 
@@ -66,7 +66,7 @@ function nextDevloper(){
     if(currentDeveloper != undefined){ 
     image.innerHTML = `<br><image src='${currentDeveloper.image}' style="border-radius: 100px;" >`;
     profile.innerHTML = `<ul class="list-group">
-    <li class="list-group-item style="background-color: #e3f2fd;"><h3>${currentDeveloper.name}</h3></li>
+    <li class="list-group-item list-group-item-success"<h2>${currentDeveloper.name}</h2></li>
     <li class="list-group-item">${currentDeveloper.work}</li>
     <li class="list-group-item">${currentDeveloper.language}</li>  
     <li class="list-group-item">${currentDeveloper.uni}</li>

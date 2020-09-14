@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .forms import Employeeform
-from .models import Employee
+from .models import Employee, Contact, Award
 from companies.models import Company
+from django.contrib import messages
 
 # Create your views here.
 #admin1234, halumhalum
@@ -56,10 +57,17 @@ def logoutUser(request):
 
 
 def employee_list(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
     context = {'employee_list': Employee.objects.all()}
     return render (request,'employee_list.html',context)
 
 def employee_form(request, id=0):
+
+    if request.user.is_anonymous:
+        return redirect("/login")
+
     if request.method == 'GET':
         if id == 0:
             form = Employeeform()
@@ -78,6 +86,9 @@ def employee_form(request, id=0):
         return redirect('/employee')
 
 def employee_delete(request,id):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
     employee = Employee.objects.get(pk=id)
     employee.delete()
     return redirect('/employee')
@@ -86,10 +97,75 @@ def employee_delete(request,id):
 
 #About
 def about(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
     return render(request,'about.html')
 
 #training
 def training(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
     return render(request, 'training.html')
 
 
+def price(request):
+
+    return render(request, 'home.html')
+
+def communication(request):
+
+    if request.method == "POST":
+        name = request.POST.get('name')
+        code = request.POST.get('code')
+        desc = request.POST.get('desc')
+        contact = Contact(name = name, code = code, desc = desc)
+        contact.save()
+        messages.success(request, "Your messege has been noted")
+
+
+    
+    return render(request, 'communication.html')
+
+def complain(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    datas = {'complain_list': Contact.objects.all() }
+
+    return render(request, 'complain.html', datas )
+
+def complain_delete(request,id):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+        complain = Contact.objects.get(pk=id)
+        complain.delete()
+    return redirect('/complain')
+
+def award(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if request.method == "POST":
+        title = request.POST.get('title')
+        name = request.POST.get('name')
+        award = Award(name = name, title = title)
+        award.save()
+    
+    contxt = {'award_list':Award.objects.all()}
+
+    return render(request,'award.html', contxt)
+
+def attendence(request):
+    return render(request, 'attendence.html')
+
+def empAward(request):
+
+    awardList = {'award_list':Award.objects.all()}
+    return render(request,'empAward.html',awardList)
+
+from notice.models import Notice
+
+def noticeEmployee(request):
+    noticeList = {'notice_list': Notice.objects.all()}
+    return render(request,'noticeEmployee.html',noticeList)

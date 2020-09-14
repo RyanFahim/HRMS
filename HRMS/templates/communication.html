@@ -1,0 +1,55 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src='{% static "images/ce2.jpg" %}' class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+
+<br>
+<h4 class="text-center"><small>
+    This form is where employee can submit their complain and also ask for leave of absent
+  </small></h4>
+<hr>
+<div class="container row">
+
+
+  <div class="col-5 my-5">
+    <img src='{% static "images/order.svg" %}' alt="" srcset="">
+  </div>
+  <div class="col-7">
+    <div class="mt-5 mb-3">
+      <h3 class="text-center">Complains and Query</h3>
+      <!-- form        -->
+      <form method="post" action="/login/communication">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="name" class="form-control" id="name" name="name" placeholder="Enter your name">
+        </div>
+
+        <div class="form-group">
+          <label for="code">EMP code</label>
+          <input type="code" class="form-control" id="code" name="code" placeholder="Enter your Employee code">
+        </div>
+
+        <div class="form-group">
+          <label for="desc">Any questions or leave of absence?</label>
+          <textarea class="form-control" id="desc" rows="3" name="desc"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+<br><br>
+{% endblock content %}

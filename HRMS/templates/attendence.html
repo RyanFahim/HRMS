@@ -1,0 +1,25 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-7">
+            <img src='{% static "images/schedule.svg" %}' alt="" srcset="">
+        </div>
+
+        <div class="col-5 mt-10">
+            <h3> Employees are requested to give attendence in the given link</h3>
+            <a
+                href="https://docs.google.com/spreadsheets/d/13Oti2-jRdhKmdJ-7Kyjx-Zj6qhWYGMwJlvM711JEGis/edit#gid=186001220" >Your
+                attendence here</a>
+        </div>
+    </div>
+
+    <hr>
+</div>
+
+{% endblock content %}

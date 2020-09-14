@@ -12,6 +12,15 @@ urlpatterns = [
     #about
     path("about/", views.about, name='about'),
     #training
-    path("training/", views.training, name='training')
+    path("training/", views.training, name='training'),
+    path("complain/", views.complain, name='complain'),
+    path("complain/delete/<int:id>/", views.complain_delete, name='complain_delete'),
+    path("login/price", views.price, name='price'),
+    path("login/communication", views.communication, name='communication'),
+    #asset
+    path('award/',views.award, name='award'),
+    path('login/attendence/', views.attendence, name='attendence'),
+    path('login/empAward', views.empAward, name='empAward'),
+    path('login/noticeEmployee', views.noticeEmployee, name='noticeEmployee')
     
 ]

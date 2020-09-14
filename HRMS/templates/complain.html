@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Welcome Admin!</strong> The complains and any kind of query are asked by the employess are given here
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<h2 class="text-center">Welcome to the complain section</h2>
+<hr>
+
+<ul class="list-group list-group-flush">
+  {% for complain in complain_list %}
+
+  <li class="list-group-item"> <strong>{{complain.name}}</strong>  stated that, <strong>'{{complain.desc}}'</strong> 
+    <!-- <form action="{% url 'complain_delete' complain.id %}" method="post" class="d-inline">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-danger btn-sm float-right">Delete</button>
+    </form> -->
+  </li>
+
+
+  {% endfor %}
+</ul>
+{% endblock body %}
+
+{% block js %}
+<!-- <script>
+function deleteNotice(id) {
+  var action = confirm("Are you sure you want to delete this user?");
+  if (action != false) {
+    $.ajax({
+      url: '{% url "delete_notice" %}',
+      data: {
+        'id': id,
+      },
+      dataType: 'json',
+      success: function (data) {
+        if (data.deleted) {
+          $("#noticeTable #notice-" + id).remove();
+        }
+      }
+    });
+  }
+}
+</script> -->
+{% endblock js %}

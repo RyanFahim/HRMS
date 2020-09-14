@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+
+<div class="row">
+
+    <div class="col-6">
+        <img src='{% static "images/win.svg" %}' alt="" srcset="">
+    </div>
+
+    <div class="col-6 mt-10">
+        <!-- form -->
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="title" class="form-control" id="title" name="title">
+            </div>
+
+            <div class="form-group">
+                <label for="name">EMP name</label>
+                <input type="name" class="form-control" id="name" name="name" placeholder="Enter your Employee name">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+
+    </div>
+</div>
+<hr>
+<div class="container">
+    <ul class="list-group">
+    {% for award in award_list %}
+        <li class="list-group-item text-center">
+            The award for <strong>{{award.title}}</strong> goes to <strong>{{award.name}}</strong>
+        </li>
+    {% endfor %}
+      </ul>
+</div>
+
+{% endblock body %}
