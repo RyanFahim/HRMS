@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+
+<div class="row">
+    {% for cv in cv_list %}
+      
+    
+    <div class="card mb-3 mx-4" style="max-width: 18rem;">
+        <div class="card-header">
+            <image src="{{cv.image.url}}" style="border-radius: 100px;"></image>
+        </div>
+        <br> 
+        <div class="card-body bg-light">
+          <h4 class="card-title text-center">{{cv.name}} </h4> <hr>
+            <h5>{{cv.skill}}</h5>
+          <p class="card-text">
+              Passed from {{cv.uni}} and contact info is {{cv.email}}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+
+
+</div>
+<!-- <div class="container">
+
+    {% for cv in cv_list %}
+    <image src="{{cv.image.url}}" style="border-radius: 100px;" width="100" height="200"></image>
+    <ul class="list-group">
+        <li class="list-group-item">{{cv.name}}</li>
+        <li class="list-group-item">{{cv.email}}</li>
+        <li class="list-group-item">{{cv.skill}}</li>
+        <li class="list-group-item">{{cv.uni}}</li>
+      </ul>      
+
+      <br>
+    {% endfor %}
+
+</div> -->
+
+{% endblock body %}
+

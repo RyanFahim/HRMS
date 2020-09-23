@@ -5,7 +5,7 @@
 
 {% block body %}
 <div class="container">
-    <h3> <center> Department </center></h3>
+    <h2> <center> Department </center></h2>
     <br>
     <div class="row">
       <div class="col-md-4 ">
@@ -24,7 +24,8 @@
         </form>
       </div>
       <div class="col-md-8">
-        <h3><center>Department List</center></h3>
+        <!-- <h3><center>Department List</center></h3> -->
+        <br>
         <table id="companyTable" class="table table-hover">
           <tr>
             <th scope="col">Name</th>
@@ -38,7 +39,7 @@
               <td class="companyHead companyData" name="head">{{company.head}}</td>
               <td class="companyLocation companyData" name="location">{{company.location}}</td>
               <td>
-                <button class="btn btn-outline-success form-control btn-sm" onClick="editCompany({{company.id}})" data-toggle="modal" data-target="#myModal")"><i class="fa fa-pencil"></i> Edit</button>
+                <!-- <button class="btn btn-outline-success form-control btn-sm" onClick="editCompany({{company.id}})" data-toggle="modal" data-target="#myModal")"><i class="fa fa-pencil"></i> Edit</button> -->
                 <!-- <button class="btn btn-success form-control" onClick="editCompany({{company.id}})" data-toggle="modal" data-target="#myModal")">EDIT</button> -->
               </td>
               
@@ -118,10 +119,9 @@ function appendToCompanyTable(company) {
             '<td class="companyHead" name="head">${company.head}</td>
             '<td class="companyLocation" name="location">${company.location}</td>
             '<td align="center">
-                <button class="btn btn-outline-success form-control btn-sm" onClick="editCompany(${company.id})" data-toggle="modal" data-target="#myModal")">EDIT</button>
             </td>
             <td align="center">
-                <button class="btn btn-outline-danger form-control btn-sm" onClick="deleteCompany(${company.id})">DELETE</button>
+                <button class="btn btn-outline-danger form-control btn-sm" onClick="deleteCompany(${company.id})"><i class="fa fa-ban"></i> Delete</button>
             </td>
         </tr>
     `);

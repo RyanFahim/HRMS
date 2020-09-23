@@ -1,0 +1,68 @@
+{% extends 'base2.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block style %}
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 55px; bottom: 0; width: 100%; }
+</style>
+{% endblock style %}
+
+{% block content %}
+<style>
+    #menu {
+    position: absolute;
+    background: #fff;
+    padding: 10px;
+    font-family: 'Open Sans', sans-serif;
+    }
+    </style>
+     
+    <div id="map"></div>
+    <div id="menu">
+    <input
+    id="streets-v11"
+    type="radio"
+    name="rtoggle"
+    value="streets"
+    checked="checked"
+    />
+    <label for="streets-v11">streets</label>
+    <input id="light-v10" type="radio" name="rtoggle" value="light" />
+    <label for="light-v10">light</label>
+    <input id="dark-v10" type="radio" name="rtoggle" value="dark" />
+    <label for="dark-v10">dark</label>
+    <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors" />
+    <label for="outdoors-v11">outdoors</label>
+    <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" />
+    <label for="satellite-v9">satellite</label>
+    </div>
+{% endblock content %}
+
+{% block js %}
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbjE0MyIsImEiOiJja2V2anZkZG8xem44MnB0OHNod3oyNXc5In0.DptohQkEMkrpxJkYJymSVg';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+zoom: 16,
+center: [90.4256, 23.7684]
+});
+var marker = new mapboxgl.Marker()
+    .setLngLat([90.4256, 23.7684])
+    .addTo(map);
+ 
+var layerList = document.getElementById('menu');
+var inputs = layerList.getElementsByTagName('input');
+ 
+function switchLayer(layer) {
+var layerId = layer.target.id;
+map.setStyle('mapbox://styles/mapbox/' + layerId);
+}
+ 
+for (var i = 0; i < inputs.length; i++) {
+inputs[i].onclick = switchLayer;
+}
+</script>
+{% endblock js %}

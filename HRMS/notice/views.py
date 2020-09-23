@@ -5,8 +5,7 @@ from .models import Notice
 
 
 class NoticeView(ListView):
-    
-    
+
     model = Notice
     template_name = 'notice.html'
     context_object_name = 'notice'

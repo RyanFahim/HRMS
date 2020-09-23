@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
 {% block body %}
+
+<!-- first row -->
 
 <div class="row">
 
@@ -11,7 +15,7 @@
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Employee </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_employee}}</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">{{total_employee}}</div>
           </div>
           <div class="col-auto">
             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -82,13 +86,12 @@
     </div>
   </div>
 </div>
-<div class="row">
-
-</div>
 <br>
+
+<!-- clock -->
 <div class="row">
   <div class="col-4">
-    <img src='{% static "images/time.svg" %}' >
+    <img src='{% static "images/time.svg" %}'>
   </div>
   <div class="col-8">
 
@@ -115,6 +118,61 @@
     </div>
   </div>
 </div>
+<br>
+<hr>
+
+<!-- Awards -->
+<div class="row">
+  <div class="col-7">
+
+    <ul class="list-group">
+      <li class="list-group-item text-center" style="background-color: #9184CE;">
+        <h3 class="text-center"> The Awards </h3>
+      </li>
+      {% for award in award_list %}
+      <li class="list-group-item text-center">
+        The award for <strong>{{award.title}}</strong> goes to <strong>{{award.name}}</strong>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="col-5">
+    <img src='{% static "images/awa.svg" %}' alt="" srcset="">
+  </div>
+</div>
+<hr>
+
+<!-- Map -->
+<h3 class="text-center" style="font-style: italic;"> Maps of Dunder Mifflin </h3><br>
+<div class="row">
+  <div class="col-7">
+    <div id='map' style='width: 720px; height: 350px;'></div>
+  </div>
+  <div class="col-5">
+    
+    <img src='{% static "images/des.svg" %}' alt="" srcset="">
+    
+  </div>
+</div>
+<hr><br><br>
 
 
 {% endblock body %}
+
+
+{% block script %}
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbjE0MyIsImEiOiJja2V2anZkZG8xem44MnB0OHNod3oyNXc5In0.DptohQkEMkrpxJkYJymSVg';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/satellite-v9',
+    center: [90.4256, 23.7684],
+    zoom: 17
+  });
+
+  var marker = new mapboxgl.Marker()
+    .setLngLat([90.4256, 23.7684])
+    .addTo(map);
+</script>
+{% endblock script %}

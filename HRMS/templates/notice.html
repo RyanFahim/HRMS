@@ -17,7 +17,7 @@
 
       <form id="addNotice" action="">
         <div class="form-group">
-          <img src='{% static "/images/notice.png" %}' alt=""> <br>
+          <img src='{% static "/images/notice.svg" %}' alt=""> <br>
           <input class="form-control" type="text" name="title" placeholder="Title" required>
         </div>
         <div class="form-group">
@@ -37,11 +37,11 @@
         {% for notice in notice %}
         <tr id="notice-{{notice.id}}">
           <td class="noticeTitle noticeData" name="title">
-            <h3>{{notice.title}}</h3>
+            <h4>{{notice.title}}</h4>
           </td>
           <td align="center">
             <button class="btn text-secondary px-0" onClick="editNotice({{notice.id}})" data-toggle="modal"
-              data-target="#myModal" )"><i class="fa fa-pencil-square-o"></i></button>
+              data-target="#myModal" )"><i class="fa fa-pencil-square-o"></i> </button>
             <button class="btn text-secondary px-0" onClick="deleteNotice({{notice.id}})"><i
                 class="fa fa-trash-o"></i></button>
           </td>
@@ -52,6 +52,21 @@
 
         </tr>
         </tr>
+
+        <!-- <ul class="list-group">
+          <li class="list-group item">{{notice.title}}
+            <span class="badge ">
+              <button class="btn text-secondary px-0" onClick="editNotice({{notice.id}})" data-toggle="modal"
+              data-target="#myModal" )"><i class="fa fa-pencil-square-o"></i></button>
+            <button class="btn text-secondary px-0" onClick="deleteNotice({{notice.id}})"><i
+                class="fa fa-trash-o"></i></button>
+            </span>
+          </li>
+          <li class="list-group item">
+            {{notice.des}}
+          </li>
+        </ul> -->
+
         {% endfor %}
         {% else %}
         No Notice
@@ -126,7 +141,7 @@
     $("#noticeTable > tbody:last-child").append(`
   
         <tr id="notice-{{notice.id}}">
-              <td class="noticeTitle noticeData" name="title"><h3>${notice.title}</h3></td>
+              <td class="noticeTitle noticeData" name="title"><h4>${notice.title}</4></td>
               <td align="center">
                 <button class="btn text-secondary px-0" onClick="editNotice(${notice.id})" data-toggle="modal" data-target="#myModal")"><i class="fa fa-pencil-square-o"></i></button>
                 <button class="btn text-secondary px-0" onClick="deleteNotice(${notice.id})"><i class="fa fa-trash-o"></i></button>

@@ -2,10 +2,11 @@ from django.shortcuts import render, HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import *
-from .forms import Employeeform
-from .models import Employee, Contact, Award
+from .forms import Employeeform, cvform
+from .models import *
 from companies.models import Company
 from django.contrib import messages
+from django import forms
 
 # Create your views here.
 #admin1234, halumhalum
@@ -24,7 +25,8 @@ def index(request):
     total_company = company.count()
 
     context ={
-        'total_employee': total_employee, 'total_company':total_company
+        'total_employee': total_employee, 'total_company':total_company,
+        'award_list': Award.objects.all()
         }
 
     
@@ -97,8 +99,7 @@ def employee_delete(request,id):
 
 #About
 def about(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
+    
     return render(request,'about.html')
 
 #training
@@ -169,3 +170,28 @@ from notice.models import Notice
 def noticeEmployee(request):
     noticeList = {'notice_list': Notice.objects.all()}
     return render(request,'noticeEmployee.html',noticeList)
+#CV
+
+
+
+
+def cv(request):
+    if request.method == 'POST':
+        form = cvform(request.POST, request.FILES)
+
+        if form.is_valid:
+            form.save()
+
+            img_obj = form.instance
+            return render(request, 'cv.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = cvform()
+    return render(request, 'cv.html', {'form': form})
+
+def candidate(request):
+
+    cvList = {'cv_list': CVinfo.objects.all()}
+    return render(request, 'candidate.html', cvList)
+
+def map(request):
+    return render(request, 'map.html')

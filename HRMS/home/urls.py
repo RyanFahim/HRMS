@@ -10,7 +10,7 @@ urlpatterns = [
     path("delete/<int:id>/",views.employee_delete, name='employee_delete'),
     path("<int:id>/",views.employee_form, name='employee_update'),
     #about
-    path("about/", views.about, name='about'),
+    path("login/about", views.about, name='about'),
     #training
     path("training/", views.training, name='training'),
     path("complain/", views.complain, name='complain'),
@@ -21,6 +21,12 @@ urlpatterns = [
     path('award/',views.award, name='award'),
     path('login/attendence/', views.attendence, name='attendence'),
     path('login/empAward', views.empAward, name='empAward'),
-    path('login/noticeEmployee', views.noticeEmployee, name='noticeEmployee')
+    path('login/noticeEmployee', views.noticeEmployee, name='noticeEmployee'),
+    #CV
+    path('login/cv', views.cv, name='cv'),
+    path('upload/', views.cv),
+    path('candidate', views.candidate, name='candidate'),
+    #Maps
+    path("login/map", views.map, name='map')
     
 ]
