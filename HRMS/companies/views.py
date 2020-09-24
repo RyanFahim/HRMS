@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.forms.models import model_to_dict
 from .models import Company
+from home.models import Employee
 # from django.views.generic import View
 
 
@@ -69,3 +70,7 @@ class DeleteCompany(View):
             'deleted': True
         }
         return JsonResponse(data)
+
+def account(request):
+    context = {'employee_list': Employee.objects.all()}
+    return render(request, 'account.html', context)

@@ -102,11 +102,7 @@ def about(request):
     
     return render(request,'about.html')
 
-#training
-def training(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-    return render(request, 'training.html')
+
 
 
 def price(request):
@@ -156,6 +152,20 @@ def award(request):
     contxt = {'award_list':Award.objects.all()}
 
     return render(request,'award.html', contxt)
+#training
+def training(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if request.method == "POST":
+        title = request.POST.get('title')
+        des = request.POST.get('des')
+        train = Train(title=title, des=des)
+        train.save()
+
+    con ={'train_list':Train.objects.all()}
+
+    return render(request, 'train.html',con)
 
 def attendence(request):
     return render(request, 'attendence.html')
@@ -199,3 +209,8 @@ def map(request):
 def account(request):
     context = {'employee_list': Employee.objects.all()}
     return render(request, 'account.html', context)
+
+def tra(request):
+    con ={'train_list':Train.objects.all()}
+
+    return render(request,'tra.html',con)

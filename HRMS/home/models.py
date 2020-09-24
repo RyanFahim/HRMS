@@ -36,6 +36,14 @@ class Award(models.Model):
     def __str__(self):
         return self.title
 
+class Train(models.Model):
+    title = models.CharField(max_length=100)
+    des = models.TextField()
+
+    def __str__(self):
+        return self.title
+    
+
 
 class CVinfo(models.Model):
     name = models.CharField(max_length=150)

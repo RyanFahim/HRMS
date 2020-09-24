@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+
+<div class="row">
+
+    <div class="col-4">
+        <img src='{% static "images/training.svg" %}' alt="" srcset="">
+    </div>
+    <div class="col-8">
+        <form method="post" action="">
+        <div class="form-group">
+            {% csrf_token %}
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">Give the title of the training</small>
+        </div>
+        <div class="form-group">
+            <label for="des">Description</label>
+            <textarea class="form-control" id="des" name='des'rows="3" ></textarea>
+            <small class="form-text text-muted">Give a description for the training</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Add to the list</button>
+    </form>
+    </div>
+</div>
+<hr>
+<div class="container">
+
+    <ul class="list-group">
+        <li class="list-group-item  list-group-item-info text-center"> <h2>Trainings</h2></li>
+        {% for train in train_list %}
+          
+
+        
+        <li class="list-group-item text-center">
+            Title:{{train.title}} <br>
+            Description:{{train.des}}
+        </li>
+        
+        {% endfor %}
+      </ul>
+
+
+</div>
+
+{% endblock body %}
