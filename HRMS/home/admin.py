@@ -7,5 +7,7 @@ admin.site.register(Postion)
 admin.site.register(Contact)
 admin.site.register(Award)
 admin.site.register(CVinfo)
+admin.site.register(Accountt)
+admin.site.register(Month)
 
 

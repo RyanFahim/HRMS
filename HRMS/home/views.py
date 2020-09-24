@@ -195,3 +195,7 @@ def candidate(request):
 
 def map(request):
     return render(request, 'map.html')
+
+def account(request):
+    context = {'employee_list': Employee.objects.all()}
+    return render(request, 'account.html', context)

@@ -27,6 +27,10 @@ urlpatterns = [
     path('upload/', views.cv),
     path('candidate', views.candidate, name='candidate'),
     #Maps
-    path("login/map", views.map, name='map')
+    path("login/map", views.map, name='map'),
+    path('account/',  views.account, name='account'),
+
+    # path('account/create/',  views.CreateAccountUser.as_view(), name='Account_create'),
+    # path('account/delete/',  views.DeleteAccount.as_view(), name='Account_delete')
     
 ]

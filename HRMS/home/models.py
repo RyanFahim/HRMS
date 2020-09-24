@@ -46,6 +46,27 @@ class CVinfo(models.Model):
 
     def __str__(self):
         return self.name
+
+class Month(models.Model):
+    month = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.month
+
+class Account(models.Model):
+    name = models.ForeignKey(Employee, on_delete= models.CASCADE)
+    month = models.ForeignKey(Month, on_delete=models.CASCADE)
+    salary = models.DecimalField(max_digits=100, decimal_places=5)
+    def __str__(self):
+        return self.name
+
+class Accountt(models.Model):
+    name = models.ForeignKey(Employee, on_delete= models.CASCADE)
+    month = models.ForeignKey(Month, on_delete=models.CASCADE)
+    year = models.CharField(max_length=1000)
+
+    
+    
     
 
 
